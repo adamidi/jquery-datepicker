@@ -14,7 +14,8 @@
         var numDays = lastDay.getDate();
         var Months = ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
         var Days = ["Sun","Mon","Tue","Wen","Thu","Fri","Sat"];
-        var parent = $("#datepicker");
+        var parent = $("#dp-plugin");
+        var plugin = $('<div id="datepicker"></div>');
         var header = $('<div id="dp-head"></div>');
         var body = $('<div id="dp-body"></div>');
         header.append('<button id="right-button" > > </button>');
@@ -34,8 +35,9 @@
             body.append('<div class="dp-element dp-day" id="'+i+'">' + i + '</div>');
         }
 
-        parent.append(header);
-        parent.append(body);
+        plugin.append(header);
+        plugin.append(body);
+        parent.after(plugin);
 
         var newMonth = function(index){
             currentMonth = new Date(thisMonth.getFullYear(), thisMonth.getMonth() +index);
@@ -46,7 +48,7 @@
         };
 
         var show= function(){
-            parent.empty();
+            plugin.empty();
             header.empty();
             body.empty();
             header.append('<button id="right-button" > > </button>');
@@ -57,7 +59,6 @@
                 body.append('<div class="dp-element">' + Days[i] + '</div>');
             }
 
-
             for(var i=0;i<firstDay;i++){
                 body.append('<div class="dp-element"></div>');
             }
@@ -66,36 +67,44 @@
                 body.append('<div class="dp-element dp-day" id="'+ i +'">' + i + '</div>');
             }
 
-            parent.append(header);
-            parent.append(body);
+            plugin.append(header);
+            plugin.append(body);
         };
 
         $(document).on("click","#right-button",function(){
             index++;
             newMonth(index);
             show();
-            console.log(index);
 
-            console.log(currentMonth,thisMonth);
-
-            if(currentMonth===thisMonth){
-                console.log("fsdf")
+            if(currentMonth.getTime()==thisMonth.getTime()){
                 var id= now.getDate();
-                $('#'+id).css("background-color","cyan");
+                $('#'+id).css("background-color","salmon");
             }
-
         });
 
         $(document).on("click","#left-button",function(){
             index--;
             newMonth(index);
             show();
-            console.log(index);
 
-            if(currentMonth==thisMonth){
+            if(currentMonth.getTime()==thisMonth.getTime()){
                 var id= now.getDate();
-                $('#'+id).css("background-color","cyan");
+                $('#'+id).css("background-color","salmon");
             }
+
+        });
+
+        if(currentMonth==thisMonth){
+            var id= now.getDate();
+            $('#'+id).css("background-color","salmon");
+        }
+
+        parent.click(function(){
+            plugin.toggle();
+        });
+
+        $(document).on("click",".dp-day",function(){
+            parent.attr("value",this.id + " / " + (currentMonth.getMonth()+1) + " / " + currentMonth.getFullYear());
 
         });
 
