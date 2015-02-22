@@ -1,23 +1,25 @@
-#datepicker{
+.datepicker{
     width: 250px;
     height: 200px;
     display: none;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     font-size: 14px;
     color: #555;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.7);
     box-shadow: 0 0 4px -1px #777;
     border-radius: 10px;
+    position: absolute;
+    z-index: 1;
 }
 
-#dp-title{
+.dp-title{
     text-align: center;
     padding-top: 10px;
 }
 
-#left-button{float:left;}
-#right-button{float:right;}
-#left-button, #right-button {
+.left-button{float:left;}
+.right-button{float:right;}
+.left-button, .right-button {
     border: none;
     padding: 10px;
     background-color: inherit;
@@ -26,11 +28,11 @@
     color:#777;
 }
 
-#dp-body {
+.dp-body {
     margin-left: 13px;}
 
-#dp-head {
-
+.dp-head {
+    margin-top: -15px;
 }
 
 .dp-element{
@@ -46,9 +48,25 @@
 }
 
 .dp-day:hover{
-    background-color: lavender;
+    background-color: khaki;
 }
 
-body{
-    background-color: lightslategray;
+.close-button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 5px;
+    height: 25px;
+    border: none;
+    border-radius: 10px;
+    background-color: khaki;
+    color:#777;
+}
+
+.close-button:hover{
+    box-shadow: 0 0 4px -1px #777;
+}
+
+.today {
+    background-color: salmon;
 }
